@@ -1,0 +1,24 @@
+# GitHub Pages configuration for Le p'tit mot du ciel
+title: "Le p'tit mot du ciel"
+description: "Prières, lectures & saint du jour, même hors-ligne, sans compte"
+url: "https://qgstudio23.github.io"
+baseurl: "/leptitmotduciel"
+
+# Site settings
+lang: fr
+encoding: UTF-8
+
+# GitHub Pages settings
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+
+# SEO settings
+author: "QG Studio 23"

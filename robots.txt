@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://qgstudio23.github.io/leptitmotduciel/sitemap.xml
+
+# Disallow unnecessary files
+Disallow: /_config.yml
+Disallow: /README.md
