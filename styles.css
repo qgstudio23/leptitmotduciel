@@ -14,6 +14,10 @@
 }
 
 /* ===== BODY STYLES ===== */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(135deg, #adc6e0 0%, #acb1b3 50%, #4d6681 100%);
@@ -47,7 +51,7 @@ body {
 /* ===== BUTTON VARIANTS ===== */
 .btn-primary {
     background: #479ce2;
-    padding: 12px 24px;
+    padding: 15px 30px;
     box-shadow: 0 4px 15px rgba(76, 89, 102, 0.3);
 }
 
@@ -58,7 +62,7 @@ body {
 
 .btn-secondary {
     background: rgba(255, 255, 255, 0.2);
-    padding: 8px 16px;
+    padding: 15px 24px;
 }
 
 .btn-secondary:hover {
