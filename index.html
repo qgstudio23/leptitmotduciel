@@ -179,7 +179,7 @@
 
         /* Main content sections */
         .content {
-            background: white;
+            background: #f8fafc;
             padding: 40px 0;
         }
 
@@ -316,31 +316,58 @@
         .privacy-highlights {
             display: flex;
             justify-content: center;
-            gap: 60px;
+            gap: 20px;
             flex-wrap: wrap;
             margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .privacy-point {
+            flex: 1;
+            min-width: 200px;
+            max-width: 220px;
             text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .privacy-point:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .privacy-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
             display: block;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .privacy-text {
             font-size: 1.1rem;
             font-weight: 500;
+            margin: 0;
         }
 
         /* Download section */
         .download-section {
-            background: white;
+            background: linear-gradient(135deg, #4d6681 0%, #1f64b2 100%);
             padding: 40px 0;
             text-align: center;
+            color: white;
+        }
+
+        .download-section .section-title {
+            color: white;
         }
 
         .mobile-downloads {
@@ -382,6 +409,10 @@
             margin-bottom: 30px;
         }
 
+        .download-section .desktop-title {
+            color: white;
+        }
+
         .desktop-downloads {
             display: flex;
             justify-content: center;
@@ -403,6 +434,20 @@
         .desktop-item:hover {
             transform: translateY(-3px);
             color: #2d3748;
+            text-decoration: none;
+        }
+
+        .download-section .desktop-item {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .download-section .desktop-item:hover {
+            transform: translateY(-3px);
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
             text-decoration: none;
         }
 
@@ -464,7 +509,15 @@
 
 
             .privacy-highlights {
-                gap: 40px;
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .privacy-point {
+                min-width: 250px;
+                max-width: 300px;
+                width: 90%;
             }
 
             .cta-buttons {
@@ -503,6 +556,292 @@
             background: linear-gradient(to right, transparent, #e2e8f0, transparent);
             margin: 2rem 0;
         }
+
+        .download-section hr {
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        /* Screenshots Gallery Section */
+        .screenshots-section {
+            background: #f8fafc;
+            padding: 40px 0;
+        }
+
+        .form-factor-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-factor-tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .form-factor-tab:hover {
+            border-color: #4d6681;
+            transform: translateY(-2px);
+        }
+
+        .form-factor-tab.active {
+            background: #4d6681;
+            color: white;
+            border-color: #4d6681;
+        }
+
+        .screenshots-carousel {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .screenshots-wrapper {
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .screenshots-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 20px;
+            align-items: center;
+            padding: 70px 0;
+        }
+
+        .screenshot-item {
+            flex-shrink: 0;
+            width: 250px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+        }
+
+        /* Desktop screenshots are wider */
+        .screenshots-container[data-form-factor="desktop"] .screenshot-item {
+            width: 400px;
+        }
+
+        /* Tablet screenshots medium size */
+        .screenshots-container[data-form-factor="tablet"] .screenshot-item {
+            width: 300px;
+        }
+
+        .screenshots-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .screenshot-indicator {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(77, 102, 129, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .screenshot-indicator:hover {
+            background: rgba(77, 102, 129, 0.5);
+            transform: scale(1.1);
+        }
+
+        .screenshot-indicator.active {
+            background: #4d6681;
+            transform: scale(1.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fullscreen-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .fullscreen-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.4s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .fullscreen-image.hidden {
+            opacity: 0;
+        }
+
+        .fullscreen-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .fullscreen-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .fullscreen-prev {
+            left: 30px;
+        }
+
+        .fullscreen-next {
+            right: 30px;
+        }
+
+        .fullscreen-info {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .screenshot-item {
+                width: 200px;
+            }
+
+            .screenshots-container[data-form-factor="desktop"] .screenshot-item {
+                width: 280px;
+            }
+
+            .screenshots-container[data-form-factor="tablet"] .screenshot-item {
+                width: 240px;
+            }
+
+            .form-factor-tab {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .fullscreen-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .fullscreen-prev {
+                left: 15px;
+            }
+
+            .fullscreen-next {
+                right: 15px;
+            }
+
+            .fullscreen-close {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        /* Disable scrolling when fullscreen modal is open */
+        body.no-scroll {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -524,7 +863,8 @@
             
             <div class="cta-buttons">
                 <a href="#download" class="btn btn-primary">Télécharger l'app</a>
-                <a href="#features" class="btn btn-secondary">Découvrir les fonctionnalités</a>
+                <!-- <a href="#features" class="btn btn-secondary">Découvrir les fonctionnalités</a>
+                <a href="#screenshots" class="btn btn-secondary">Voir les captures d'écran</a> -->
             </div>
         </div>
         
@@ -596,62 +936,6 @@
                                 marque-pages, reprends toujours là où tu t'es arrêté.
                             </p>
                         </div>
-
-                        <!-- Cloned cards to fill the right side -->
-                        <div class="feature-card">
-                            <span class="feature-icon">📖</span>
-                            <h3 class="feature-title">Les lectures du jour… même sans internet</h3>
-                            <p class="feature-description">
-                                Retrouve chaque jour les lectures de la messe (lectures, psaume, évangile). 
-                                L'app télécharge discrètement plusieurs mois de lectures en arrière-plan. 
-                                Parfait pour les retraites, la montagne ou le mode avion !
-                            </p>
-                        </div>
-
-                        <div class="feature-card">
-                            <span class="feature-icon">💬</span>
-                            <h3 class="feature-title">Une citation biblique chaque matin</h3>
-                            <p class="feature-description">
-                                Commence ta journée avec une notification inspirante : "Le p'tit mot du ciel". 
-                                Une parole tirée de la Bible, courte, percutante, toujours pleine de lumière.
-                            </p>
-                        </div>
-
-                        <div class="feature-card">
-                            <span class="feature-icon">🙏</span>
-                            <h3 class="feature-title">Le saint du jour</h3>
-                            <p class="feature-description">
-                                Découvre chaque jour la vie d'un saint ou d'une sainte, pour t'inspirer, 
-                                prier et apprendre à mieux connaître la richesse spirituelle de l'Église.
-                            </p>
-                        </div>
-
-                        <div class="feature-card">
-                            <span class="feature-icon">📚</span>
-                            <h3 class="feature-title">Tes prières personnalisées</h3>
-                            <p class="feature-description">
-                                Une collection de prières classées par thème, plus la possibilité d'ajouter 
-                                tes propres prières. Crée tes catégories et personnalise ton coin prière.
-                            </p>
-                        </div>
-
-                        <div class="feature-card" data-slide="4">
-                            <span class="feature-icon">🧘</span>
-                            <h3 class="feature-title">Méditations sur les évangiles</h3>
-                            <p class="feature-description">
-                                Pour chaque texte des évangiles, l'app propose une méditation intégrée, 
-                                lisible même sans connexion. Nourris ta prière personnelle à ton rythme.
-                            </p>
-                        </div>
-
-                        <div class="feature-card" data-slide="5">
-                            <span class="feature-icon">✝️</span>
-                            <h3 class="feature-title">Une Bible fluide et suivie</h3>
-                            <p class="feature-description">
-                                Lis la Bible dans son intégralité, à ton rythme. Grâce au système de 
-                                marque-pages, reprends toujours là où tu t'es arrêté.
-                            </p>
-                        </div>
                     </div>
                 </div>
 
@@ -698,11 +982,142 @@
         </div>
     </section>
 
+    <!-- Screenshots Gallery Section -->
+    <section class="screenshots-section" id="screenshots">
+        <div class="section">
+            <h2 class="section-title dancing-title">Aperçu de l'application</h2>
+            <p style="font-size: 1.1rem; color: #718096; margin-bottom: 40px; text-align: center;">
+                Découvrez l'interface de l'application sur différents appareils
+            </p>
+            
+            <!-- Form Factor Tabs -->
+            <div class="form-factor-tabs">
+                <div class="form-factor-tab active" onclick="switchFormFactor('phone')">Téléphone</div>
+                <div class="form-factor-tab" onclick="switchFormFactor('tablet')">Tablette</div>
+                <div class="form-factor-tab" onclick="switchFormFactor('desktop')">Ordinateur</div>
+            </div>
+            
+            <!-- Screenshots Carousel -->
+            <div class="screenshots-carousel">
+                <div class="screenshots-wrapper">
+                    <!-- Phone Screenshots -->
+                    <div class="screenshots-container" id="phone-container" data-form-factor="phone">
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 0)">
+                            <img src="images/screenshots/phone/1.png" alt="Écran d'accueil - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 1)">
+                            <img src="images/screenshots/phone/2.png" alt="Lectures du jour - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 2)">
+                            <img src="images/screenshots/phone/3.png" alt="Saint du jour - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 3)">
+                            <img src="images/screenshots/phone/4.png" alt="Prières - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 4)">
+                            <img src="images/screenshots/phone/5.png" alt="Bible - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 5)">
+                            <img src="images/screenshots/phone/6.png" alt="Méditations - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 6)">
+                            <img src="images/screenshots/phone/7.png" alt="Paramètres - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 7)">
+                            <img src="images/screenshots/phone/8.png" alt="Navigation - Téléphone">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('phone', 8)">
+                            <img src="images/screenshots/phone/9.png" alt="Fonctionnalités - Téléphone">
+                        </div>
+                    </div>
+                    
+                    <!-- Tablet Screenshots -->
+                    <div class="screenshots-container" id="tablet-container" data-form-factor="tablet" style="display: none;">
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 0)">
+                            <img src="images/screenshots/tablet/1.png" alt="Écran d'accueil - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 1)">
+                            <img src="images/screenshots/tablet/2.png" alt="Lectures du jour - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 2)">
+                            <img src="images/screenshots/tablet/3.png" alt="Saint du jour - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 3)">
+                            <img src="images/screenshots/tablet/4.png" alt="Prières - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 4)">
+                            <img src="images/screenshots/tablet/5.png" alt="Bible - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 5)">
+                            <img src="images/screenshots/tablet/6.png" alt="Méditations - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 6)">
+                            <img src="images/screenshots/tablet/7.png" alt="Paramètres - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 7)">
+                            <img src="images/screenshots/tablet/8.png" alt="Navigation - Tablette">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('tablet', 8)">
+                            <img src="images/screenshots/tablet/9.png" alt="Fonctionnalités - Tablette">
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Screenshots -->
+                    <div class="screenshots-container" id="desktop-container" data-form-factor="desktop" style="display: none;">
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 0)">
+                            <img src="images/screenshots/desktop/1.png" alt="Écran d'accueil - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 1)">
+                            <img src="images/screenshots/desktop/2.png" alt="Lectures du jour - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 2)">
+                            <img src="images/screenshots/desktop/3.png" alt="Saint du jour - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 3)">
+                            <img src="images/screenshots/desktop/4.png" alt="Prières - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 4)">
+                            <img src="images/screenshots/desktop/5.png" alt="Bible - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 5)">
+                            <img src="images/screenshots/desktop/6.png" alt="Méditations - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 6)">
+                            <img src="images/screenshots/desktop/7.png" alt="Paramètres - Ordinateur">
+                        </div>
+                        <div class="screenshot-item" onclick="openFullscreen('desktop', 7)">
+                            <img src="images/screenshots/desktop/8.png" alt="Navigation - Ordinateur">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicators for current form factor -->
+                <div class="screenshots-indicators" id="screenshots-indicators">
+                    <!-- Indicators will be dynamically generated -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Modal -->
+    <div class="fullscreen-modal" id="fullscreen-modal">
+        <div class="fullscreen-content">
+            <img src="" alt="" class="fullscreen-image" id="fullscreen-image-1">
+            <img src="" alt="" class="fullscreen-image hidden" id="fullscreen-image-2">
+        </div>
+        <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
+        <button class="fullscreen-nav fullscreen-prev" onclick="navigateFullscreen(-1)">‹</button>
+        <button class="fullscreen-nav fullscreen-next" onclick="navigateFullscreen(1)">›</button>
+        <div class="fullscreen-info" id="fullscreen-info">
+            <!-- Form factor and image info will be displayed here -->
+        </div>
+    </div>
+
     <!-- Download Section -->
     <section class="download-section" id="download">
         <div class="section">
             <h2 class="section-title dancing-title">Télécharger l'application</h2>
-            <p style="font-size: 1.1rem; color: #718096; margin-bottom: 20px;">
+            <p style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 20px;">
                 L'application est disponible sur mobile et ordinateur
             </p>
             
@@ -727,8 +1142,8 @@
                         <span class="desktop-name">Windows (.msi)</span>
                     </a>
                     
-                    <a href="#download" class="desktop-item">
-                        <img src="images/macos-logo.svg" alt="macOS" class="desktop-logo disabled">
+                    <a href="#download" class="desktop-item disabled">
+                        <img src="images/macos-logo.svg" alt="macOS" class="desktop-logo">
                         <span class="desktop-name">macOS (.dmg)</span>
                     </a>
                     
@@ -754,21 +1169,65 @@
     </footer>
 
     <script>
-        // Simple carousel with visual continuity
+        // Features carousel with smart centering
         let currentSlide = 0;
         const totalSlides = 6;
-        const cardWidth = 340; // 300px card width + 40px margins
-        let isTransitioning = false;
         
-        function updateCarousel(animate = true) {
+        function updateCarousel() {
             const container = document.getElementById('carousel-container');
             const indicators = document.querySelectorAll('.indicator');
+            if (!container) return;
             
-            // Set transition
-            container.style.transition = animate ? 'transform 0.5s ease' : 'none';
+            // Get the container's parent width
+            const containerParent = container.parentElement;
+            const viewportWidth = containerParent.offsetWidth;
             
-            // Move carousel - always show cards on the right
-            container.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+            // Responsive card dimensions based on screen size
+            let cardVisualWidth, cardWidth;
+            if (window.innerWidth <= 480) {
+                cardVisualWidth = 250; // CSS: width: 250px
+                cardWidth = 270; // 250px + 20px margins (10px each side)
+            } else if (window.innerWidth <= 768) {
+                cardVisualWidth = 280; // CSS: width: 280px  
+                cardWidth = 300; // 280px + 20px margins (10px each side)
+            } else {
+                cardVisualWidth = 300; // CSS: width: 300px
+                cardWidth = 340; // 300px + 40px margins (20px each side)
+            }
+            
+            let translateX;
+            
+            if (totalSlides <= 1) {
+                // Single card or less - center it
+                translateX = (viewportWidth - cardVisualWidth) / 2;
+            } else {
+                // Calculate total content width
+                const totalContentWidth = (totalSlides - 1) * cardWidth + cardVisualWidth;
+                
+                if (totalContentWidth <= viewportWidth) {
+                    // All cards fit - center the entire collection
+                    translateX = (viewportWidth - totalContentWidth) / 2;
+                } else {
+                    // Special handling for first and last items
+                    if (currentSlide === 0) {
+                        // First card - position at left with 40px margin
+                        translateX = 40;
+                    } else if (currentSlide === totalSlides - 1) {
+                        // Last card - position so its right edge is 40px from screen right edge
+                        const lastCardPosition = currentSlide * cardWidth;
+                        translateX = (viewportWidth - 40) - lastCardPosition - cardVisualWidth;
+                    } else {
+                        // Middle cards - try to center, but constrain to prevent empty space
+                        const idealTranslateX = (viewportWidth - cardVisualWidth) / 2 - (currentSlide * cardWidth);
+                        const leftBound = 40; // Don't go past left edge
+                        const rightBound = (viewportWidth - 40) - ((totalSlides - 1) * cardWidth) - cardVisualWidth; // Don't go past right edge
+                        
+                        translateX = Math.max(rightBound, Math.min(leftBound, idealTranslateX));
+                    }
+                }
+            }
+            
+            container.style.transform = `translateX(${translateX}px)`;
             
             // Update indicators
             indicators.forEach((indicator, index) => {
@@ -776,60 +1235,55 @@
             });
         }
         
-        function nextSlide() {
-            if (isTransitioning) return;
-            
-            isTransitioning = true;
-            
-            // Move to next slide
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel(true);
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 500);
-        }
-        
-        function previousSlide() {
-            if (isTransitioning) return;
-            
-            isTransitioning = true;
-            
-            // Move to previous slide
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel(true);
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 500);
-        }
-        
         function goToSlide(slideIndex) {
-            if (isTransitioning || slideIndex < 0 || slideIndex >= totalSlides) return;
+            if (slideIndex < 0 || slideIndex >= totalSlides) return;
             
-            isTransitioning = true;
             currentSlide = slideIndex;
-            updateCarousel(true);
-            
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 500);
-        }
-        
-        // Auto-play carousel
-        function startAutoPlay() {
-            setInterval(() => {
-                nextSlide();
-            }, 5000); // Change slide every 5 seconds
+            updateCarousel();
         }
         
         // Initialize carousel
         document.addEventListener('DOMContentLoaded', function() {
             currentSlide = 0;
-            updateCarousel(false);
+            updateCarousel();
             
-            // Enable auto-play
-            startAutoPlay();
+            // Add touch/swipe support for features carousel
+            const featuresCarousel = document.getElementById('carousel-container');
+            if (featuresCarousel) {
+                let startX = 0;
+                let isDragging = false;
+                
+                featuresCarousel.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+                
+                featuresCarousel.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault(); // Prevent scrolling
+                });
+                
+                featuresCarousel.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    // Minimum swipe distance (50px)
+                    if (Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            // Swipe left - next slide
+                            const nextSlide = (currentSlide + 1) % totalSlides;
+                            goToSlide(nextSlide);
+                        } else {
+                            // Swipe right - previous slide
+                            const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                            goToSlide(prevSlide);
+                        }
+                    }
+                });
+            }
         });
 
         // Scroll animations for hero section
@@ -852,40 +1306,378 @@
                 hero.classList.remove('scrolled');
             }
         });
+
+        // Screenshots Gallery functionality
+        let currentFormFactor = 'phone';
+        let currentScreenshotIndex = 0;
+
+        let fullscreenFormFactor = 'phone';
+        let fullscreenIndex = 0;
+        let currentFullscreenImage = 1; // Track which image element is currently active (1 or 2)
+        let isFullscreenTransitioning = false; // Prevent multiple fullscreen transitions at once
         
-        // Touch/swipe support for mobile
-        let startX = 0;
-        let isDragging = false;
-        
-        const carousel = document.getElementById('carousel-container');
-        
-        carousel.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-        });
-        
-        carousel.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-        });
-        
-        carousel.addEventListener('touchend', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
+        const screenshots = {
+            phone: 9,    // 9 phone screenshots
+            tablet: 9,   // 9 tablet screenshots
+            desktop: 8   // 8 desktop screenshots
+        };
+
+        function switchFormFactor(formFactor) {
+            // Update active tab
+            document.querySelectorAll('.form-factor-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
             
-            const endX = e.changedTouches[0].clientX;
-            const diffX = startX - endX;
+            // Hide all containers
+            document.querySelectorAll('.screenshots-container').forEach(container => {
+                container.style.display = 'none';
+            });
             
-            // Minimum swipe distance
-            if (Math.abs(diffX) > 50) {
-                if (diffX > 0) {
-                    // Swipe left - next slide
-                    nextSlide();
-                } else {
-                    // Swipe right - previous slide
-                    previousSlide();
+            // Show selected container
+            const container = document.getElementById(`${formFactor}-container`);
+            if (container) {
+                container.style.display = 'flex';
+            }
+            
+            currentFormFactor = formFactor;
+            currentScreenshotIndex = 0;
+            
+            // Update indicators and center the first image
+            updateScreenshotsIndicators();
+            updateScreenshotsCarousel();
+        }
+
+        function updateScreenshotsIndicators() {
+            const indicatorsContainer = document.getElementById('screenshots-indicators');
+            const totalScreenshots = screenshots[currentFormFactor];
+            
+            // Clear existing indicators
+            indicatorsContainer.innerHTML = '';
+            
+            // Create new indicators
+            for (let i = 0; i < totalScreenshots; i++) {
+                const indicator = document.createElement('span');
+                indicator.className = `screenshot-indicator ${i === currentScreenshotIndex ? 'active' : ''}`;
+                indicator.onclick = () => goToScreenshot(i);
+                indicatorsContainer.appendChild(indicator);
+            }
+        }
+
+        function goToScreenshot(index) {
+            const totalScreenshots = screenshots[currentFormFactor];
+            if (index < 0 || index >= totalScreenshots) return;
+            
+            currentScreenshotIndex = index;
+            updateScreenshotsCarousel();
+            updateScreenshotsIndicators();
+        }
+
+        function updateScreenshotsCarousel() {
+            const container = document.getElementById(`${currentFormFactor}-container`);
+            if (!container) return;
+            
+            // Responsive dimensions based on screen size and form factor
+            let itemWidth, imageWidth;
+            
+            if (window.innerWidth <= 768) {
+                // Mobile responsive sizes (matches CSS @media queries)
+                if (currentFormFactor === 'desktop') {
+                    imageWidth = 280; // CSS: width: 280px
+                    itemWidth = 300; // 280px + 20px gap
+                } else if (currentFormFactor === 'tablet') {
+                    imageWidth = 240; // CSS: width: 240px  
+                    itemWidth = 260; // 240px + 20px gap
+                } else { // phone
+                    imageWidth = 200; // CSS: width: 200px
+                    itemWidth = 220; // 200px + 20px gap
+                }
+            } else {
+                // Desktop sizes
+                if (currentFormFactor === 'desktop') {
+                    imageWidth = 400; // CSS: width: 400px
+                    itemWidth = 420; // 400px + 20px gap
+                } else if (currentFormFactor === 'tablet') {
+                    imageWidth = 300; // CSS: width: 300px
+                    itemWidth = 320; // 300px + 20px gap  
+                } else { // phone
+                    imageWidth = 250; // CSS: width: 250px
+                    itemWidth = 270; // 250px + 20px gap
                 }
             }
+            
+            // Get the container's parent width
+            const containerParent = container.parentElement;
+            const viewportWidth = containerParent.offsetWidth;
+            
+            const totalImages = screenshots[currentFormFactor];
+            
+            let translateX;
+            
+            if (totalImages <= 1) {
+                // Single image or less - center it
+                translateX = (viewportWidth - imageWidth) / 2;
+            } else {
+                // Calculate total content width
+                const totalContentWidth = (totalImages - 1) * itemWidth + imageWidth;
+                
+                if (totalContentWidth <= viewportWidth) {
+                    // All images fit - center the entire collection
+                    translateX = (viewportWidth - totalContentWidth) / 2;
+                } else {
+                    // Special handling for first and last items
+                    if (currentScreenshotIndex === 0) {
+                        // First image - position at left with 40px margin
+                        translateX = 40;
+                    } else if (currentScreenshotIndex === totalImages - 1) {
+                        // Last image - position so its right edge is 40px from screen right edge
+                        // Position of last image = (totalImages - 1) * itemWidth (since itemWidth includes gap)
+                        // We want the last image's right edge at: viewportWidth - 40
+                        // So: translateX + lastImagePosition + imageWidth = viewportWidth - 40
+                        const lastImagePosition = currentScreenshotIndex * itemWidth;
+                        translateX = (viewportWidth - 40) - lastImagePosition - imageWidth;
+                    } else {
+                        // Middle images - try to center, but constrain to prevent empty space
+                        const idealTranslateX = (viewportWidth - imageWidth) / 2 - (currentScreenshotIndex * itemWidth);
+                        const leftBound = 40; // Don't go past left edge
+                        const rightBound = (viewportWidth - 40) - ((totalImages - 1) * itemWidth) - imageWidth; // Don't go past right edge
+                        
+                        translateX = Math.max(rightBound, Math.min(leftBound, idealTranslateX));
+                    }
+                }
+            }
+            
+            container.style.transform = `translateX(${translateX}px)`;
+        }
+
+
+
+
+
+        // Fullscreen functionality
+        function openFullscreen(formFactor, index) {
+            fullscreenFormFactor = formFactor;
+            fullscreenIndex = index;
+            currentFullscreenImage = 1;
+            isFullscreenTransitioning = false;
+            
+            const modal = document.getElementById('fullscreen-modal');
+            const image1 = document.getElementById('fullscreen-image-1');
+            const image2 = document.getElementById('fullscreen-image-2');
+            const info = document.getElementById('fullscreen-info');
+            
+            // Set initial image source on image1
+            image1.src = `images/screenshots/${formFactor}/${index + 1}.png`;
+            image1.alt = `Capture d'écran ${index + 1} - ${getFormFactorLabel(formFactor)}`;
+            image1.classList.remove('hidden');
+            
+            // Hide image2
+            image2.classList.add('hidden');
+            
+            // Set info text
+            info.textContent = `${getFormFactorLabel(formFactor)} - Image ${index + 1} sur ${screenshots[formFactor]}`;
+            
+            // Disable body scrolling
+            document.body.classList.add('no-scroll');
+            
+            // Show modal with animation
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+            
+
+        }
+
+        function closeFullscreen() {
+            const modal = document.getElementById('fullscreen-modal');
+            
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+            
+            // Re-enable body scrolling
+            document.body.classList.remove('no-scroll');
+        }
+
+        function navigateFullscreen(direction) {
+            // Prevent multiple transitions at once
+            if (isFullscreenTransitioning) return;
+            
+            isFullscreenTransitioning = true;
+            
+            const totalScreenshots = screenshots[fullscreenFormFactor];
+            fullscreenIndex = (fullscreenIndex + direction + totalScreenshots) % totalScreenshots;
+            
+            const image1 = document.getElementById('fullscreen-image-1');
+            const image2 = document.getElementById('fullscreen-image-2');
+            const info = document.getElementById('fullscreen-info');
+            
+            // Determine which image is currently visible and which will be the new one
+            const currentImage = currentFullscreenImage === 1 ? image1 : image2;
+            const nextImage = currentFullscreenImage === 1 ? image2 : image1;
+            
+            // Load the new image source into the hidden image
+            nextImage.src = `images/screenshots/${fullscreenFormFactor}/${fullscreenIndex + 1}.png`;
+            nextImage.alt = `Capture d'écran ${fullscreenIndex + 1} - ${getFormFactorLabel(fullscreenFormFactor)}`;
+            
+            // Wait for the image to load, then start crossfade
+            nextImage.onload = function() {
+                // Start the crossfade: hide current, show next
+                currentImage.classList.add('hidden');
+                nextImage.classList.remove('hidden');
+                
+                // Update info text
+                info.textContent = `${getFormFactorLabel(fullscreenFormFactor)} - Image ${fullscreenIndex + 1} sur ${screenshots[fullscreenFormFactor]}`;
+                
+                // Switch the active image reference for next transition
+                currentFullscreenImage = currentFullscreenImage === 1 ? 2 : 1;
+                
+                // Reset transition flag after animation completes
+                setTimeout(() => {
+                    isFullscreenTransitioning = false;
+                }, 400); // Match the CSS transition duration
+            };
+            
+            // Handle image load error
+            nextImage.onerror = function() {
+                isFullscreenTransitioning = false;
+            };
+        }
+
+        function getFormFactorLabel(formFactor) {
+            const labels = {
+                phone: 'Téléphone',
+                tablet: 'Tablette',
+                desktop: 'Ordinateur'
+            };
+            return labels[formFactor] || formFactor;
+        }
+
+        // Keyboard navigation for fullscreen
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('fullscreen-modal');
+            if (modal.classList.contains('show')) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        navigateFullscreen(-1);
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        navigateFullscreen(1);
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        closeFullscreen();
+                        break;
+                }
+            }
+        });
+
+        // Close fullscreen when clicking outside the image
+        document.getElementById('fullscreen-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeFullscreen();
+            }
+        });
+
+        // Add touch/swipe support for fullscreen modal
+        const fullscreenModal = document.getElementById('fullscreen-modal');
+        if (fullscreenModal) {
+            let startX = 0;
+            let isDragging = false;
+            
+            fullscreenModal.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            });
+            
+            fullscreenModal.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault(); // Prevent scrolling
+            });
+            
+            fullscreenModal.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                
+                // Minimum swipe distance (50px)
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe left - next image
+                        navigateFullscreen(1);
+                    } else {
+                        // Swipe right - previous image
+                        navigateFullscreen(-1);
+                    }
+                }
+            });
+        }
+
+        // Initialize screenshots gallery on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize indicators for phone (default)
+            updateScreenshotsIndicators();
+            
+            // Set initial carousel position
+            updateScreenshotsCarousel();
+            
+            // Add touch/swipe support for screenshots gallery
+            function addSwipeSupport(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                
+                let startX = 0;
+                let isDragging = false;
+                
+                container.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isDragging = true;
+                });
+                
+                container.addEventListener('touchmove', (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault(); // Prevent scrolling
+                });
+                
+                container.addEventListener('touchend', (e) => {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+                    
+                    // Minimum swipe distance (50px)
+                    if (Math.abs(diffX) > 50) {
+                        const totalImages = screenshots[currentFormFactor];
+                        if (diffX > 0) {
+                            // Swipe left - next screenshot
+                            const nextIndex = (currentScreenshotIndex + 1) % totalImages;
+                            goToScreenshot(nextIndex);
+                        } else {
+                            // Swipe right - previous screenshot
+                            const prevIndex = (currentScreenshotIndex - 1 + totalImages) % totalImages;
+                            goToScreenshot(prevIndex);
+                        }
+                    }
+                });
+            }
+            
+            // Add swipe support to all screenshot containers
+            addSwipeSupport('phone-container');
+            addSwipeSupport('tablet-container');
+            addSwipeSupport('desktop-container');
+        });
+
+        // Recalculate positioning on window resize
+        window.addEventListener('resize', function() {
+            updateScreenshotsCarousel();
+            updateCarousel(); // Also update features carousel
         });
     </script>
 </body>
