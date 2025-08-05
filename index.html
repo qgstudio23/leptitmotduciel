@@ -64,7 +64,6 @@
             margin: 0 auto 40px;
             border-radius: 15%;
             filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.2));
-            border: 4px solid rgba(255, 255, 255, 0.4);
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             animation: float 6s ease-in-out infinite;
@@ -214,6 +213,12 @@
             transition: transform 0.5s ease;
             gap: 0;
             padding-bottom: 50px;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .carousel-container:active {
+            cursor: grabbing;
         }
 
         .feature-card {
@@ -379,6 +384,40 @@
             flex-wrap: wrap;
         }
 
+        .store-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .direct-download-link {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .direct-download-link a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .direct-download-link a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+
         .store-button {
             display: inline-block;
             transition: transform 0.3s ease;
@@ -464,6 +503,10 @@
         @media (max-width: 768px) {
             .mobile-downloads {
                 gap: 20px;
+            }
+            
+            .store-group {
+                gap: 8px;
             }
             
             .store-button img {
@@ -632,6 +675,12 @@
             gap: 20px;
             align-items: center;
             padding: 70px 0;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .screenshots-container:active {
+            cursor: grabbing;
         }
 
         .screenshot-item {
@@ -1140,13 +1189,23 @@
             
             <!-- Mobile App Stores -->
             <div class="mobile-downloads">
-                <a href="https://play.google.com/store/apps/details?id=com.willou.catho" class="store-button" target="_blank" rel="noopener">
-                    <img src="images/play-store-logo.png" alt="Télécharger sur Google Play">
-                </a>
+                <div class="store-group">
+                    <a href="https://play.google.com/store/apps/details?id=com.willou.catho" class="store-button" target="_blank" rel="noopener">
+                        <img src="images/play-store-logo.png" alt="Télécharger sur Google Play">
+                    </a>
+                    <div class="direct-download-link">
+                        <a href="https://github.com/qgstudio23/leptitmotduciel/releases/download/1.2-android/leptitmotduciel-1.2.apk" target="_blank" rel="noopener">Télécharger l'APK directement</a>
+                    </div>
+                </div>
                 
-                <a href="#download" class="store-button disabled" target="" rel="noopener">
-                    <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1590883200" alt="Télécharger sur l'App Store">
-                </a>
+                <div class="store-group">
+                    <a href="#download" class="store-button disabled" target="" rel="noopener">
+                        <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1590883200" alt="Télécharger sur l'App Store">
+                    </a>
+                    <div class="direct-download-link">
+                        <a href="#download" class="disabled" target="" rel="noopener">Télécharger l'IPA directement</a>
+                    </div>
+                </div>
             </div>
 
             <hr>
@@ -1264,43 +1323,25 @@
             currentSlide = 0;
             updateCarousel();
             
-            // Add touch/swipe support for features carousel
-            const featuresCarousel = document.getElementById('carousel-container');
-            if (featuresCarousel) {
-                let startX = 0;
-                let isDragging = false;
-                
-                featuresCarousel.addEventListener('touchstart', (e) => {
-                    startX = e.touches[0].clientX;
-                    isDragging = true;
-                });
-                
-                featuresCarousel.addEventListener('touchmove', (e) => {
-                    if (!isDragging) return;
-                    e.preventDefault(); // Prevent scrolling
-                });
-                
-                featuresCarousel.addEventListener('touchend', (e) => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    
-                    const endX = e.changedTouches[0].clientX;
-                    const diffX = startX - endX;
-                    
-                    // Minimum swipe distance (50px)
-                    if (Math.abs(diffX) > 50) {
-                        if (diffX > 0) {
-                            // Swipe left - next slide
-                            const nextSlide = (currentSlide + 1) % totalSlides;
-                            goToSlide(nextSlide);
-                        } else {
-                            // Swipe right - previous slide
-                            const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                            goToSlide(prevSlide);
-                        }
-                    }
-                });
-            }
+            // Add free drag support for features carousel
+            addFreeDragSupport('carousel-container', {
+                getCurrentPosition: () => currentSlide,
+                getTotalItems: () => totalSlides,
+                updatePosition: (position) => {
+                    currentSlide = position;
+                    updateCarousel();
+                },
+                getItemWidth: () => {
+                    if (window.innerWidth <= 480) return 270; // 250px + 20px margins
+                    if (window.innerWidth <= 768) return 300; // 280px + 20px margins
+                    return 340; // 300px + 40px margins
+                },
+                getVisualWidth: () => {
+                    if (window.innerWidth <= 480) return 250;
+                    if (window.innerWidth <= 768) return 280;
+                    return 300;
+                }
+            });
         });
 
         // Scroll animations for hero section
@@ -1363,6 +1404,9 @@
             // Update indicators and center the first image
             updateScreenshotsIndicators();
             updateScreenshotsCarousel();
+            
+            // Add drag support to the new container
+            addScreenshotsDragSupport();
         }
 
         function updateScreenshotsIndicators() {
@@ -1600,20 +1644,220 @@
             }
         });
 
+        // Initialize screenshots drag support on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize drag support for the default (phone) container
+            setTimeout(() => {  // Small delay to ensure DOM is ready
+                addScreenshotsDragSupport();
+            }, 100);
+        });
+
+        // Add drag support for screenshots gallery
+        function addScreenshotsDragSupport() {
+            const containerId = `${currentFormFactor}-container`;
+            addFreeDragSupport(containerId, {
+                getCurrentPosition: () => currentScreenshotIndex,
+                getTotalItems: () => screenshots[currentFormFactor],
+                updatePosition: (position) => {
+                    currentScreenshotIndex = position;
+                    updateScreenshotsCarousel();
+                    updateScreenshotsIndicators();
+                },
+                getItemWidth: () => {
+                    if (window.innerWidth <= 768) {
+                        if (currentFormFactor === 'desktop') return 300; // 280px + 20px gap
+                        if (currentFormFactor === 'tablet') return 260; // 240px + 20px gap
+                        return 220; // phone: 200px + 20px gap
+                    } else {
+                        if (currentFormFactor === 'desktop') return 420; // 400px + 20px gap
+                        if (currentFormFactor === 'tablet') return 320; // 300px + 20px gap
+                        return 270; // phone: 250px + 20px gap
+                    }
+                },
+                getVisualWidth: () => {
+                    if (window.innerWidth <= 768) {
+                        if (currentFormFactor === 'desktop') return 280;
+                        if (currentFormFactor === 'tablet') return 240;
+                        return 200; // phone
+                    } else {
+                        if (currentFormFactor === 'desktop') return 400;
+                        if (currentFormFactor === 'tablet') return 300;
+                        return 250; // phone
+                    }
+                }
+            });
+        }
+
+        // Universal free drag support function
+        function addFreeDragSupport(containerId, config) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let initialTransform = 0;
+            let currentTransform = 0;
+            let lastMoveTime = 0;
+            let velocity = 0;
+            let dragStartTime = 0;
+
+            // Remove any existing event listeners
+            container.removeEventListener('touchstart', handleTouchStart);
+            container.removeEventListener('touchmove', handleTouchMove);
+            container.removeEventListener('touchend', handleTouchEnd);
+
+            // Touch events
+            container.addEventListener('touchstart', handleTouchStart, { passive: false });
+            container.addEventListener('touchmove', handleTouchMove, { passive: false });
+            container.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+            // Mouse events for desktop
+            container.addEventListener('mousedown', handleMouseDown);
+
+            function handleTouchStart(e) {
+                startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }
+
+            function handleMouseDown(e) {
+                e.preventDefault();
+                startDrag(e.clientX, e.clientY);
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+            }
+
+            function startDrag(clientX, clientY) {
+                isDragging = true;
+                startX = clientX;
+                startY = clientY;
+                dragStartTime = Date.now();
+                lastMoveTime = dragStartTime;
+                velocity = 0;
+
+                // Get current transform value
+                const currentTransformValue = container.style.transform;
+                const match = currentTransformValue.match(/translateX\(([^)]+)px\)/);
+                initialTransform = match ? parseFloat(match[1]) : 0;
+                currentTransform = initialTransform;
+
+                // Disable transitions during drag
+                container.style.transition = 'none';
+            }
+
+            function handleTouchMove(e) {
+                if (!isDragging) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(currentX - startX);
+                const diffY = Math.abs(currentY - startY);
+                
+                // Only prevent default and handle drag if horizontal movement dominates
+                if (diffX > diffY && diffX > 5) {
+                    e.preventDefault();
+                    continueDrag(currentX);
+                }
+            }
+
+            function handleMouseMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                continueDrag(e.clientX);
+            }
+
+            function continueDrag(clientX) {
+                const deltaX = clientX - startX;
+                const now = Date.now();
+                const deltaTime = now - lastMoveTime;
+                
+                if (deltaTime > 0) {
+                    velocity = (clientX - startX) / (now - dragStartTime);
+                }
+                lastMoveTime = now;
+
+                currentTransform = initialTransform + deltaX;
+                container.style.transform = `translateX(${currentTransform}px)`;
+            }
+
+            function handleTouchEnd(e) {
+                if (!isDragging) return;
+                endDrag();
+            }
+
+            function handleMouseUp(e) {
+                if (!isDragging) return;
+                endDrag();
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            }
+
+            function endDrag() {
+                if (!isDragging) return;
+                isDragging = false;
+
+                // Re-enable transitions
+                container.style.transition = 'transform 0.5s ease';
+
+                const totalItems = config.getTotalItems();
+                const itemWidth = config.getItemWidth();
+                const visualWidth = config.getVisualWidth();
+                const containerParent = container.parentElement;
+                const viewportWidth = containerParent.offsetWidth;
+
+                // Calculate which item should be centered based on current position
+                let targetIndex = config.getCurrentPosition();
+
+                // Apply momentum if there's significant velocity
+                const dragDuration = Date.now() - dragStartTime;
+                const dragDistance = Math.abs(currentTransform - initialTransform);
+                
+                if (Math.abs(velocity) > 0.5 && dragDuration > 100) {
+                    // Add momentum-based adjustment
+                    const momentumFactor = Math.min(Math.abs(velocity) * 0.3, 2);
+                    if (velocity > 0) {
+                        targetIndex = Math.max(0, targetIndex - Math.ceil(momentumFactor));
+                    } else {
+                        targetIndex = Math.min(totalItems - 1, targetIndex + Math.ceil(momentumFactor));
+                    }
+                } else if (dragDistance > itemWidth * 0.3) {
+                    // If dragged more than 30% of item width, move to next/prev
+                    if (currentTransform > initialTransform) {
+                        targetIndex = Math.max(0, targetIndex - 1);
+                    } else {
+                        targetIndex = Math.min(totalItems - 1, targetIndex + 1);
+                    }
+                }
+
+                // Update to target position
+                config.updatePosition(targetIndex);
+            }
+        }
+
         // Add touch/swipe support for fullscreen modal
         const fullscreenModal = document.getElementById('fullscreen-modal');
         if (fullscreenModal) {
             let startX = 0;
+            let startY = 0;
             let isDragging = false;
             
             fullscreenModal.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
                 isDragging = true;
             });
             
             fullscreenModal.addEventListener('touchmove', (e) => {
                 if (!isDragging) return;
-                e.preventDefault(); // Prevent scrolling
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(currentX - startX);
+                const diffY = Math.abs(currentY - startY);
+                
+                // Only prevent default if horizontal movement is greater than vertical
+                if (diffX > diffY && diffX > 10) {
+                    e.preventDefault(); // Prevent scrolling only for horizontal swipes
+                }
             });
             
             fullscreenModal.addEventListener('touchend', (e) => {
@@ -1621,10 +1865,12 @@
                 isDragging = false;
                 
                 const endX = e.changedTouches[0].clientX;
+                const endY = e.changedTouches[0].clientY;
                 const diffX = startX - endX;
+                const diffY = Math.abs(startY - endY);
                 
-                // Minimum swipe distance (50px)
-                if (Math.abs(diffX) > 50) {
+                // Only trigger swipe if horizontal movement is greater than vertical and meets minimum distance
+                if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
                     if (diffX > 0) {
                         // Swipe left - next image
                         navigateFullscreen(1);
@@ -1650,16 +1896,27 @@
                 if (!container) return;
                 
                 let startX = 0;
+                let startY = 0;
                 let isDragging = false;
                 
                 container.addEventListener('touchstart', (e) => {
                     startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
                     isDragging = true;
                 });
                 
                 container.addEventListener('touchmove', (e) => {
                     if (!isDragging) return;
-                    e.preventDefault(); // Prevent scrolling
+                    
+                    const currentX = e.touches[0].clientX;
+                    const currentY = e.touches[0].clientY;
+                    const diffX = Math.abs(currentX - startX);
+                    const diffY = Math.abs(currentY - startY);
+                    
+                    // Only prevent default if horizontal movement is greater than vertical
+                    if (diffX > diffY && diffX > 10) {
+                        e.preventDefault(); // Prevent scrolling only for horizontal swipes
+                    }
                 });
                 
                 container.addEventListener('touchend', (e) => {
@@ -1667,19 +1924,25 @@
                     isDragging = false;
                     
                     const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
                     const diffX = startX - endX;
+                    const diffY = Math.abs(startY - endY);
                     
-                    // Minimum swipe distance (50px)
-                    if (Math.abs(diffX) > 50) {
+                    // Only trigger swipe if horizontal movement is greater than vertical and meets minimum distance
+                    if (Math.abs(diffX) > 50 && Math.abs(diffX) > diffY) {
                         const totalImages = screenshots[currentFormFactor];
                         if (diffX > 0) {
-                            // Swipe left - next screenshot
-                            const nextIndex = (currentScreenshotIndex + 1) % totalImages;
-                            goToScreenshot(nextIndex);
+                            // Swipe left - next screenshot (stop at boundary)
+                            const nextIndex = Math.min(totalImages - 1, currentScreenshotIndex + 1);
+                            if (nextIndex !== currentScreenshotIndex) {
+                                goToScreenshot(nextIndex);
+                            }
                         } else {
-                            // Swipe right - previous screenshot
-                            const prevIndex = (currentScreenshotIndex - 1 + totalImages) % totalImages;
-                            goToScreenshot(prevIndex);
+                            // Swipe right - previous screenshot (stop at boundary)
+                            const prevIndex = Math.max(0, currentScreenshotIndex - 1);
+                            if (prevIndex !== currentScreenshotIndex) {
+                                goToScreenshot(prevIndex);
+                            }
                         }
                     }
                 });
